@@ -3,6 +3,9 @@
 </div>
 
 <form ng-submit="vm.login()">
+  <input type="name"
+         ng-model="vm.user.name"
+         placeholder="Full Name">
   <input type="email"
          ng-model="vm.user.email"
          placeholder="email">
