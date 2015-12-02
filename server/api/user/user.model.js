@@ -5,9 +5,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
-  email: String,
+  name: { type: String, required: true },
+  email: { type: String, required: true },
   passwordHash: { type: String, select: false },
-  salt: { type: String, select: false }
+  salt: { type: String, select: false },
+  exercises: [Date],
+  _groups: [{type: mongoose.Schema.Types.ObjectId, ref:'Group', required: false }]
 });
 
 /**
