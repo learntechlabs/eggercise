@@ -1,3 +1,5 @@
+'use strict';
+
 var request = require('supertest'),
   User = require('../../api/user/user.model');
 
@@ -14,5 +16,6 @@ var request = require('supertest'),
       var user = new User({name: 'blah', email: 'test@test.com', password: 'test'});
       expect(user.passwordHash).toBeDefined();
       expect(user.salt).toBeDefined();
+      expect(user.authenticate('test')).toBe(true);
     });
   });
