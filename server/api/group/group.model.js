@@ -6,7 +6,6 @@ var Schema = mongoose.Schema;
 // create a schema for Group
 var groupSchema = new Schema({
   name: { type: String, required: true },
-  email: { type: String, required: true },
   bet: { type: Number, required: true },
   description: { type: String, required: false },
   start: { type: Date, required: true },
