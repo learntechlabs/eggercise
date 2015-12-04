@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- these first 3 meta tags need to come before anything else -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- *Bootstrap is mobile first; add in mobile first styles* -->
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <title>Eggercise</title>
+  </head>
+  <body>
+    <!-- this give the 'GroupCtrl' name to know what page we are on -->
+
+    <div class="container">
+    {{ vm.name }}
+
+      <h1>My Groups</h1>
+      <div class="row">
+        <div class="col-xs-6">
+          <a href="https://google.com">
+            <div class="jumbotron">
+              <div class="row">
+                <div class="col-md-6 text-center">
+                  <div class="glyphicon glyphicon-pencil large-glyph">
+                  </div>
+                </div>
+                <div class="col-md-6 text-center">
+                  <div class="glyph-title">
+                    Log Exercise
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-xs-6">
+          <a href="https://google.com">
+            <div class="jumbotron">
+              <div class="row">
+                <div class="col-md-6 text-center">
+                  <div class="glyphicon glyphicon-plus large-glyph">
+                  </div>
+                </div>
+                <div class="col-md-6 text-center">
+                  <div class="glyph-title">
+                    Add Group
+                  </div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <h2>Active Groups</h2>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Active Group 1</h3>
+            </div>
+            <div class="panel-body">
+              Group info here
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h2>Past Groups</h2>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">Past Group 1</h3>
+            </div>
+            <div class="panel-body">
+              Group info here
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

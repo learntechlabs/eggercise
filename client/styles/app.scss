@@ -1,3 +1,17 @@
 body {
   font-family: sans-serif;
 }
+
+.large-glyph {
+  font-size: 500%;
+}
+
+.glyph-title {
+  font-size: 200%;
+}
+
+.control-button {
+  clear: both;
+  display: flex;
+  align-items: center;
+}

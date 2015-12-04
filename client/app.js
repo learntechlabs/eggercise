@@ -5,7 +5,8 @@ angular.module('eggercise', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngAnimate'
+  'ngAnimate',
+  'ui.bootstrap'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
 
