@@ -171,8 +171,9 @@ describe('Group', function() {
       });
     });
 
-    //delete group
-    it('should delete the group', function (done) {
+
+    //delete a group (positive)
+    it('should delete the group (positive) ', function (done) {
       var creatorId = creator._id;
       agent
       .post('/api/groups/delete/' + group._id)
@@ -186,6 +187,7 @@ describe('Group', function() {
             if(err){
               done.fail.err;
             }else{
+              expect(deletedGroup).toBeDefined();
               done();
             }
           })
@@ -193,7 +195,29 @@ describe('Group', function() {
       });
     })
 
-    it('should update an existing group', function (done){
+    //delete a group (negative)
+    it('should delete the group (negative)', function (done) {
+      var creatorId = creator._id;
+      var group_id = 'bull12345692owopk'
+      agent
+      .post('/api/groups/delete/' + group_id)
+      .set('Authorization', 'Bearer ' + auth.token)
+      .expect('Content-Type', /json/)
+      .end(function (error, res) {
+        console.log('res.error: ', res.error);
+        console.log('res.body: ', res.body);
+        if (res) {
+          expect(res.status).toBe(404);
+          expect(res.body.err).toBe('deletedGroup not found');
+          done();
+        } else {
+          done.fail(error);
+        }
+      });
+    });
+
+    //update an group (positive)
+    it('should update an existing group(positive)', function (done){
       var creatorId = creator._id;
       agent
       .post('/api/groups/update/' + group._id)
@@ -226,6 +250,32 @@ describe('Group', function() {
       })
     });
 
+    //update an group (negative) 
+    it('should update an existing group(negative)', function (done){
+      var creatorId = creator._id;
+      var group_id = 'ball12345692owopk'
+      agent
+      .post('/api/groups/update/' + group_id)
+      .send({
+        name:'update',
+        bet: 10,
+        start:'02-01-2016',
+        end: '02-31-2016',
+        _creator: creatorId
+      })
+      .set('Authorization', 'Bearer ' + auth.token)
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function (error, res){
+        if(res){
+          expect(res.status).toBe(404);
+          expect(res.body.err).toBe('updatedGroup not found');
+          done();
+        }else {
+          done.fail(error);
+        }
+      })
+    });
 
   });
 });
