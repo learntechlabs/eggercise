@@ -43,6 +43,25 @@ describe('Group', function() {
     });
   });
 
+  describe('without data', function() {
+
+    it('should return no groups', function (done) {
+      agent
+      .get('/api/groups')
+      .set('Authorization', 'Bearer ' + auth.token)
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function (err, res) {
+        if(err) {
+          done.fail(err);
+        } else {
+          expect(res.body.length).toEqual(0);
+          done();
+        }
+      });
+    });
+  });
+
   describe('with data', function() {
     var group;
 
@@ -75,6 +94,23 @@ describe('Group', function() {
       });
     });
 
+
+    it('should return all groups', function (done) {
+      agent
+      .get('/api/groups')
+      .set('Authorization', 'Bearer ' + auth.token)
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .end(function (err, res) {
+        if(err) {
+          done.fail(err);
+        } else {
+          expect(res.body.length).toEqual(1);
+          done();
+        }
+      });
+    });
+
     // it('login', loginUser());
     it('should create a new group', function (done) {
       var creatorId = creator._id;
@@ -93,7 +129,7 @@ describe('Group', function() {
         if (error) {
           done.fail(error);
         } else {
-          var returnedGroup = res.body.group;
+          var returnedGroup = res.body;
           expect(returnedGroup.name).toBe('testGroupCreate1');
           Group.findOne({ _id: returnedGroup._id})
           .remove(function (error) {
@@ -122,11 +158,9 @@ describe('Group', function() {
           })
         }
       });
-    })
-
+    });
   });
 });
-
 
 function loginUser (auth, done) {
   agent
@@ -138,16 +172,14 @@ function loginUser (auth, done) {
   .expect(200)
   .end(onResponse);
 
-
-	function onResponse(error, res) {
-		if(error) {
-			console.log(error);
-			throw error;
-		} else {
-			auth.token = res.body.token;
-			agent.saveCookies(res);
-			done();
-		}
-	};
-
+  function onResponse(error, res) {
+    if(error) {
+      console.log(error);
+      throw error;
+    } else {
+      auth.token = res.body.token;
+      agent.saveCookies(res);
+      done();
+    }
+  }
 }

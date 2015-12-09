@@ -12,7 +12,7 @@ module.exports = function (app) {
   app.use('/auth', require('./auth'));
 
   // Returning 404 when user tries to access hidden route
-  app.route('/:url(api|app|bower_components|assets)/*')
+  app.route('/:url(app|bower_components|assets)/*')
     .get(function (req, res) {
       res.status(404).end();
     });

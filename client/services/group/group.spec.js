@@ -22,12 +22,38 @@
         error: function(err) {
           errorMessage = err;
         }
-      }; 
+      };
 
       // Use the Jasmine spyOn method to setup a callback using our handler mock object
       spyOn(handler, 'success').and.callThrough();
-      spyOn(handler, 'error').and.callThrough();      
+      spyOn(handler, 'error').and.callThrough();
     }));
+
+    //Test for showAllGroups()
+    it('should show the list of groups', function () {
+      var id = '56662b84c6e3a5280b1209aa';
+      var existingGroup = {
+        _id : id,
+        name : 'New Group',
+        email : 'new3@email.com',
+        bet : 25,
+        start: '2015-12-01T08:00:00Z',
+        end: '2015-12-31T08:00:00Z',
+        _creator : '565f912726c74d251d0a7b03'
+      };
+      // expect(200);
+      var response = service.showAllGroups()
+        .then(function () {
+          console.log('successful');
+        })
+        .catch(function (err) {
+          console.log('Error!!!', err);
+        });
+
+      expect(response).toBeTruthy();
+      // $httpBackend.flush();
+    })
+
 
     //Test for createGroup()
     it('should create a new group', function () {
@@ -39,10 +65,10 @@
         .catch(function (err) {
           console.log('Error!!!', err);
         });
-        
+
       expect(createG).toBeTruthy();
       // $httpBackend.flush();
-    });
+    })
 
 
     it('should delete a group', function() {
@@ -67,16 +93,16 @@
           if (groupId === existingGroup._id) {
             return [200, existingGroup];
           } else {
-            return [404, { message: 'Not Found' }]; 
+            return [404, { message: 'Not Found' }];
           }
         });
 
-      // setup the service to use the success and error handler functions we defined in the beforeEach block. 
+      // setup the service to use the success and error handler functions we defined in the beforeEach block.
       service.deleteGroup(id).then(handler.success, handler.error);
       // execute the HTTP API call
       $httpBackend.flush();
 
-      //tests the results
+      // tests the results
       // expect(handler.success).toHaveBeenCalled();
       expect(groupData[0]._id).toEqual(existingGroup._id);
       expect(handler.error).not.toHaveBeenCalled();

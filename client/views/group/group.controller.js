@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eggercise')
-  .controller('GroupCtrl', ['$log', '$routeParams', 'GroupService', function ($log, $routeParams,GroupService) {
+  .controller('GroupCtrl', ['$location', '$log', '$routeParams', 'GroupService', function ($location, $log, $routeParams,GroupService) {
 
     var vm = this;
     vm.formData = {};
@@ -16,6 +16,20 @@ angular.module('eggercise')
 
     });
 
+    //Show all exisiting groups in database
+  vm.showAllGroups = function () {
+    GroupService.showAllGroups()
+    .then(function (foundGroups){
+      for(var i = 0; i < foundGroups.length; i++){
+        vm.groups.push(foundGroups[i]);
+      }
+    })
+    .catch(function (err){
+      console.log('deleteGroup err:' + err);
+    })
+  }
+
+
     //delete a group
     vm.deleteGroup = function (id){
       GroupService.deleteGroup(id)
@@ -25,7 +39,7 @@ angular.module('eggercise')
           if(vm.groups[i]._id === data._id){
             vm.groups.splice(i,1);
             break;
-          } 
+          }
         }
       })
       .catch(function (error){
