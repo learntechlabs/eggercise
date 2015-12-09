@@ -97,7 +97,7 @@ describe('User', function() {
               expect(postUser.email).toBe('changed2@changed.com');
               done();
             }
-          })
+          });
         }
       });
     });
