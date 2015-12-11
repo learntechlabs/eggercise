@@ -1,0 +1,14 @@
+<div>
+  <h1>Update Profile</h1>
+</div>
+
+<form ng-submit="vm.editProfile()">
+  <input type="name" ng-model="vm.formData.name" placeholder="name">
+  <input type="email" ng-model="vm.formData.email" placeholder="email">
+  <input type="password" ng-model="vm.formData.password" placeholder="password">
+  <button type="submit">
+    Update
+  </button>
+</form>
+
+<pre ng-if="vm.error">{{ vm.error | json }}</pre>

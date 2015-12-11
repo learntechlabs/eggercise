@@ -6,11 +6,13 @@ module.exports = function (app) {
 
   // API
   app.use('/api/users', require('./api/user'));
+  app.use('/api/groups', require('./api/group'));
 
   // Auth
   app.use('/auth', require('./auth'));
 
-  app.route('/:url(api|app|bower_components|assets)/*')
+  // Returning 404 when user tries to access hidden route
+  app.route('/:url(app|bower_components|assets)/*')
     .get(function (req, res) {
       res.status(404).end();
     });

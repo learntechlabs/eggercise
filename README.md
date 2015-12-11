@@ -20,7 +20,9 @@ https://ltl-enterprise.slack.com/files/dordal/F0FJ35FJT/eggercise_mockups.pdf
 
 * Tabs must be 2 spaces
 * Tabs must be stored as spaces, not tabs characters
-* Function names are camelcase and start with an uppercase
+* Function names are camelcase 
+* Constructor functions, including Angular controllers and services, start with uppercase
+* All other functions should start with lowercase
 * Variable names are camelcase and start with a lowercase
 * Names do not have '-' or '_' characters in them
 

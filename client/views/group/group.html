@@ -1,0 +1,74 @@
+<div class="container">
+  <h1>My Groups</h1>
+  <div class="row">
+    <div class="col-xs-6">
+      <a href="/log">
+        <div class="jumbotron">
+          <div class="row">
+            <div class="col-md-6 text-center">
+              <div class="glyphicon glyphicon-pencil large-glyph">
+              </div>
+            </div>
+            <div class="col-md-6 text-center">
+              <div class="glyph-title">
+                Log Exercise
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col-xs-6">
+      <a href="/group/create">
+        <div class="jumbotron">
+          <div class="row">
+            <div class="col-md-6 text-center">
+              <div class="glyphicon glyphicon-plus large-glyph">
+              </div>
+            </div>
+            <div class="col-md-6 text-center">
+              <div class="glyph-title">
+                Add Group
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <h2>Active Groups</h2>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Active Group 1</h3>
+        </div>
+        <div class="panel-body">
+          <!-- Current user name display and edit (form field) -->
+          <div ui-sortable ng-init="vm.showAllGroups()">
+          <div ng-repeat="group in vm.groups">
+            <div ng-submit="vm.deleteGroup()">
+              <p> <a href="#">{{ group.name }}</a> - ${{ group.bet }}
+              <button class="btn btn-danger" ng-click="vm.deleteGroup(group._id)" aria-label="Delete"> Delete </button>
+              </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>Past Groups</h2>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Past Group 1</h3>
+        </div>
+        <div class="panel-body">
+          Group info here
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
