@@ -3,9 +3,9 @@
 angular.module('eggercise')
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/group/show', {
-        templateUrl: 'views/single_group/singlegroup.html',
-        controller: 'ShowGroupCtrl',
+      .when('/log', {
+        templateUrl: 'views/workoutlog/workoutlog.html',
+        controller: 'WorkoutCtrl',
         controllerAs: 'vm'
       })
       .otherwise({
