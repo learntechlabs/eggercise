@@ -70,7 +70,15 @@ exports.updateProfile = function (req, res) {
   });
 };
 
+/**
+ * Log workout on a day.
+ *
+ * @param req
+ * @param res
+ */
 exports.logWorkout = function (req, res) {
+  //Try changing this to req.params._id;
+  // var query = {'_id': req.params.id};
   var query = {'_id': req.user._id};
   User.findById(query, function (err, user) {
     if (err) {
@@ -79,6 +87,33 @@ exports.logWorkout = function (req, res) {
       var date = req.body.exercises;
       user.exercises.push(date);
       user.save();
+      res.json(user);
+    }
+  });
+};
+
+/**
+ * Unlog workout on a day.
+ *
+ * @param req
+ * @param res
+ */
+exports.unlogWorkout = function (req, res) {
+  // var query = {'_id': req.params.id};
+  var query = {'_id': req.user._id};
+  User.findById(query, function (err, user) {
+    if (err) {
+      return handleError(error, error);
+    } else {
+      var date = req.body.exercises;
+      var convertedDate = new Date(date).toString();
+      for (var i = 0; i < user.exercises.length; i++) {
+        if(convertedDate == user.exercises[i]){
+          user.exercises.splice(i,1);
+          user.save();
+          break;
+        }
+      }
       res.json(user);
     }
   });
