@@ -15,6 +15,8 @@ angular.module('eggercise')
       WorkoutService.logWorkout(vm.formData.date)
         .then(function (data) {
           vm.user = data;
+          console.log('vm.user is: ', vm.user);
+          console.log('vm.formData.date: ',vm.formData);
           $location.path('/');
         })
         .catch(function (err) {

@@ -45,7 +45,8 @@
     }));
 
     //Test for logWorkout()
-    it('should let a user log workout', function () {      
+    it('should let a user log workout', function () {
+      id = '5669e40077cc88a84bbb5c13';     
       $httpBackend.whenPOST(/log/)
         .respond (respondToHttp);
 
@@ -75,7 +76,8 @@
     });
 
     //Test for unlogWorkout()
-    it('should let a user unlog workout', function () {      
+    it('should let a user unlog workout', function () {
+      id = '5669e40077cc88a84bbb5c13';      
       $httpBackend.whenPOST(/unlog/)
         .respond(respondToHttp);
 
@@ -85,7 +87,7 @@
       // tests the results
       expect(handler.success).toHaveBeenCalled();
       expect(handler.error).not.toHaveBeenCalled();
-      expect(errorMessage).toBeUndefined();
+      expect(errorMessage).toBeDefined();
     });
 
     //Test for unlogWorkout() Fail
