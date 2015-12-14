@@ -8,6 +8,7 @@ var InviteSchema = new Schema({
   email: { type: String, required: true },
   _user: { type: mongoose.Schema.Types.ObjectId, ref:'User', required: false },
   _group: { type: mongoose.Schema.Types.ObjectId, ref:'Group', required: true },
+  status: { type: Boolean, required: false },
   created_at: Date,
   updated_at: Date
 });

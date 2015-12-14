@@ -122,20 +122,17 @@ exports.update = function (req, res){
 //Show Leaderboard with members
 exports.showGroupLeaderboard = function (req, res){
   var groupId = req.params.group_id;
-  console.log('group id: ', groupId);
   Group.findOne({_id: groupId})
   .populate('_members')
   .exec(function (error, foundGroup) {
-      if(foundGroup){
-        console.log('foundGroup: ', foundGroup);
-        res.status(200).json({
-          members: foundGroup._members
-        });
-      }
-      else{
-        return handleError(res, 'group not found', 404);
-      }
-    })
+    if(foundGroup){
+      res.status(200).json({
+        members: foundGroup._members
+      });
+    } else {
+      return handleError(res, 'group not found', 404);
+    }
+  })
 };
 
 

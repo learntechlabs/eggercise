@@ -7,6 +7,7 @@ module.exports = function (app) {
   // API
   app.use('/api/users', require('./api/user'));
   app.use('/api/groups', require('./api/group'));
+  app.use('/api/invites', require('./api/invite'));
 
   // Auth
   app.use('/auth', require('./auth'));
