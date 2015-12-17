@@ -10,6 +10,8 @@ angular.module('eggercise')
     vm.allDates = [];
     vm.numberOfDays = 0;
     vm.checkBox = [];
+    vm.allGroups = [];
+    vm.firstStartDate = 99999999999999;
 
     angular.extend(vm, {
 
@@ -26,8 +28,18 @@ angular.module('eggercise')
           //current date in unit 'days'
           var todayDate = Math.floor(Date.now()/millisToDays);
 
+          for(var i = 0; i < data._groups.length; i++) {
+            var convertedStartDate = Math.floor(new Date(data._groups[i].start)/millisToDays);
+            if (convertedStartDate < vm.firstStartDate) {
+              vm.firstStartDate = convertedStartDate;
+            }
+          }
+          var logStartDate = vm.firstStartDate;
+          if (joinDate < vm.firstStartDate) {
+            logStartDate = joinDate;
+          }
           //vm.numberOfDays is number of days between user's join date and current date
-          vm.numberOfDays = todayDate - joinDate + 1;
+          vm.numberOfDays = todayDate - logStartDate;
           vm.user = data;
           vm.user.convertedExercises = [];
 
@@ -42,11 +54,12 @@ angular.module('eggercise')
           //Build the array vm.allDates to iterate through in the future
           for(var j=vm.numberOfDays; j>=0; j--) {
               vm.allDates.push({
-                //todayDate - j is for checking the dates from now to joinDate 
+                //todayDate - j is for checking the dates from now to logStartDate 
                 date: (new Date((todayDate - j + 1)*millisToDays)+'').substring(0,15),
                 checked: (vm.user.convertedExercises.indexOf(todayDate - j) !== -1)
               });
           }
+          vm.allDates.reverse();
           $location.path('/log');
         })
         .catch(function (err) {
