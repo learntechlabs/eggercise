@@ -35,10 +35,10 @@ angular.module('eggercise')
               vm.firstStartDate = convertedStartDate;
             }
           }
-          var logStartDate = vm.firstStartDate;
+          var logStartDate = vm.firstStartDate + 1;
           //if user's date of joining the website is earlier than any of his/her groups' start dates,
           //set logStartDate to equal joinDate
-          if (joinDate < vm.firstStartDate) {
+          if (joinDate < logStartDate) {
             logStartDate = joinDate;
           }
           //vm.numberOfDays is number of days between user's groups' earliest log date and current date
@@ -56,10 +56,10 @@ angular.module('eggercise')
 
           //Build the array vm.allDates to iterate through in the future
           // if(vm.numberOfDays !==j){
-            for(var j=vm.numberOfDays; j>=0; j--) {
+            for(var j=vm.numberOfDays+1; j>0; j--) {
                 vm.allDates.push({
                   //todayDate - j is for checking the dates from now to logStartDate 
-                  date: (new Date((todayDate - j)*millisToDays)+'').substring(0,15),
+                  date: (new Date((todayDate - j + 1)*millisToDays)+'').substring(0,15),
                   checked: (vm.user.convertedExercises.indexOf(todayDate - j) !== -1)
                 });
             }  
@@ -77,7 +77,7 @@ angular.module('eggercise')
     logToggle: function(index, date) {
       var logPath;
 
-      if(vm.allDates[index].checked == true) {
+      if(vm.allDates[index].checked === true) {
         logPath = 'log';
       } else {
         logPath = 'unlog';

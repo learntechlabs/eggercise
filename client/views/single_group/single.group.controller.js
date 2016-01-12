@@ -15,7 +15,6 @@ angular.module('eggercise')
       vm.sdate_ms;
       vm.edate_ms;
       vm.youOwe;
-      vm.days;
       vm.daysBehind;
       vm.daysAhead;
       vm.pot;
@@ -41,7 +40,11 @@ angular.module('eggercise')
               }
               var tdate = new Date();
               vm.totaldays = Date.daysBetween(sdate, edate);
-              vm.elapsedday = Date.daysBetween(sdate, tdate);
+              if(tdate < sdate) {
+                vm.elapsedday = 0;
+              } else {
+                vm.elapsedday = Date.daysBetween(sdate, tdate);
+              }
               vm.group = data;
 
               for (var i = 0; i < data._members.length; i++) {
@@ -70,16 +73,17 @@ angular.module('eggercise')
           GroupService.showGroup(id)
             .then(function (data) {
               data.you = user;
-              data.leader = {email: 'leader@test.com', exercises: -1};
-              data.runnerUp = {email: 'runnerUp@test.com', exercises: -2};
+              data.leader = {email: 'leader@test.com', exercises: 0};
+              data.runnerUp = {email: 'runnerUp@test.com', exercises: 0};
 
               for (var i = 0; i < data._members.length; i++) {
                 data._members[i].validExercises = [];
                 for(var j = 0; j < data._members[i].exercises.length; j++) {
                   //each member's separate log entries changed into milliseconds unit
                   var logInMilli = new Date(data._members[i].exercises[j]).getTime();
+
                   //if log is in between start and end date of the group, push to array
-                  if((logInMilli > vm.sdate_ms) && (logInMilli < vm.edate_ms)) {
+                  if((logInMilli >= vm.sdate_ms) && (logInMilli <= vm.edate_ms)) {
                     data._members[i].validExercises.push(data._members[i].exercises[j]);
                   }
                 }
@@ -122,12 +126,12 @@ angular.module('eggercise')
               //Comparing current user to the leader of the group
               if(data.you.email == data.leader.email) {
                 daysDifference = data.leader.exercises - data.runnerUp.exercises;
-                vm.daysAhead = Math.abs(daysDifference + 1);
+                vm.daysAhead = Math.abs(daysDifference);
                 vm.youOwe = winnersPot;
               } else {
-                daysDifference = data.leader.exercises - user.exercises.length;
-                vm.daysBehind = Math.abs(daysDifference);
-                vm.youOwe = Math.abs(daysDifference*vm.group.bet);
+                  daysDifference = data.leader.exercises - user.exercises.length;
+                  vm.daysBehind = Math.abs(daysDifference);
+                  vm.youOwe = Math.abs(daysDifference*vm.group.bet);
               }
 
               vm.group = data;
