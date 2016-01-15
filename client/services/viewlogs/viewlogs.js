@@ -10,9 +10,6 @@ angular.module('eggercise')
      $http.get('/api/users/showLog/' + id)
         .success(function (foundLogs) {
           deferred.resolve(foundLogs);
-          if(foundLogs = []){
-            console.log('This user currently has no logs');
-          };
         })
         .error(function (error) {
           console.log(error);

@@ -7,7 +7,10 @@ body {
   font-family: sans-serif;
   margin: 0 0 60px;
 }
+.loggedDates{
+  font-size: 1.15em;
 
+}
 .footer {
   bottom: 0;
   margin-top: 2px;
@@ -27,6 +30,15 @@ body {
 .nav-tabs {
   border-bottom: none;
 }
+
+#noLogs{
+  color: tomato;
+  font-weight: bold;
+  display: none;
+  width: 80%;
+  margin: 2px;
+}
+
 
 #slides_control > div {
   height: 700px;

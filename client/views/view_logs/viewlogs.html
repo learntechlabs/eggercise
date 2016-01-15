@@ -1,9 +1,13 @@
 <div class="container">
   <div ui-sortable ng-init="vm.showLogs()">
-    <div>
-      <p> YOUR LOGS MAN: </p>
-      <hr>
-      <p>{{vm.logs}}</p>
-    </div>
+      <h2> Current Logs: </h2>
+      <span id ="noLogs"></span>
+      </hr>
+      <div ng-repeat="log in vm.logs">
+        <p class="loggedDates">{{log}}</p>
+      </div>
   </div>
+  <!-- <div ng-controller="ShowGroupCtrl as group">
+    <a href="/group/show/{{group.group_id}}"> Back </a>
+  </div> -->
 </div>
