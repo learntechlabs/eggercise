@@ -15,31 +15,34 @@ function handleSuccess(res, message, status) {
   return res.status(status).json({message: message});
 }
 
-function generateInvitation (id) {
-  var emailBody = "You've been invited, please join by clicking on the link to accept your invitation."
-  var emailLink = "http://www.eggercise.com/invites/accept/" + id;
-  return emailBody + ' ' + emailLink;
+function generateInvitation (invitedUserName, groupCreator, id) {
+  var emailBody = "Hello " + invitedUserName + ", you've been invited by " + groupCreator + " to join the Eggercise app! Please join by clicking on the link to accept your invitation."
+  var localBaseUrl = "localhost:3000";
+  var eggerciseBaseUrl = "https://www.eggercise.com"
+  var fullUrl = localBaseUrl + "/invites/accept/" + id;
+  return emailBody + " " + fullUrl;
 }
 
 //Creates a new invite in the DB
 exports.create = function (req, res) {
   var creatorId = req.user._id;
   var groupId = req.body._group;
-
   var groupCreator = req.user;
+  var groupCreatorName = groupCreator.name;
+  var invitedUserName = req.body.name;
 
   var invite = new Invite ({
+    name: req.body.name,
     email: req.body.email,
     _group: groupId,
     status: false
   });
-  invite.save(function (error, savedInvite) {
+
+  invite.save(function (error, savedInvite, groupId) {
     if (savedInvite) {
       var subject = "You've been invited to join eggercise!"
-      var emailText = generateInvitation(savedInvite._id);
+      var emailText = generateInvitation(invitedUserName, groupCreatorName, savedInvite._id);
       var emailTo = savedInvite.email;
-
-      console.log('This is the emailText: ', emailText);
 
       EmailService.send(emailTo, subject, emailText, function(err, json) {
         if (json) {

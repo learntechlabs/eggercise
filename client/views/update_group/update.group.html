@@ -23,9 +23,9 @@
             <div>
               Start Date
               <p class="input-group">
-              <input ng-model="vm.formData.start" type="text" 
-              datepicker-popup="mediumDate" 
-              is-open="vm.startDatePickerIsOpen" 
+              <input ng-model="vm.formData.start" type="text"
+              datepicker-popup="mediumDate"
+              is-open="vm.startDatePickerIsOpen"
               ng-click="vm.valuationDatePickerOpen()"
               class="form-control"/>
               <span class="input-group-btn">
@@ -35,13 +35,12 @@
               </span>
               </p>
             </div>
-
             <div>
               End Date
               <p class="input-group">
-              <input ng-model="vm.formData.end" type="text" 
-              datepicker-popup="mediumDate" 
-              is-open="vm.endDatePickerIsOpen" 
+              <input ng-model="vm.formData.end" type="text"
+              datepicker-popup="mediumDate"
+              is-open="vm.endDatePickerIsOpen"
               ng-click="vm.valuationDatePickerOpen()"
               class="form-control"/>
               <span class="input-group-btn">
@@ -51,12 +50,10 @@
               </span>
               </p>
             </div>
-
             <input type="submit" class="btn btn-primary" value="Update">
             <a ng-click="back()" class="btn btn-default" id="cancel-button"> Cancel </a>
           </div>
         </div>
-
       </form>
     </div>
   </div>
@@ -76,19 +73,5 @@
         </div>
       </div>
     </div>
-
-    <div ng-controller="InviteCtrl as invite" class="col-xs-12">
-      <form role="form" ng-submit="invite.createInvite(invite.formData)">
-        <div class="row">
-          <div class="input-group col-md-4">
-            <input ng-model="invite.formData.email" type="text" placeholder="enter an email to invite a member" class="form-control">
-            <span class="input-group-btn">
-              <input type="submit" class="btn btn-primary" value="Add">
-            </span>
-          </div>
-        </div>
-      </form>
-      <div id="sentInvite"></div>
-    </div>
-
+  </div>
 </div>

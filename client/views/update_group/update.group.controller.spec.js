@@ -6,7 +6,7 @@
   describe('UpdateGroupCtrl', function() {
     var rootScope, controller, groupService, passPromise;
 
-    beforeEach(inject(function($rootScope, $controller, $q) {      
+    beforeEach(inject(function($rootScope, $controller, $q) {
       rootScope = $rootScope;
       // Mock GroupService methods to return the expected data.
       // No need to call the actual GroupService. It has its own spec.
