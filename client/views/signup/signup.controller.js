@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eggercise')
-  .controller('SignupCtrl', function ($location, Auth) {
+  .controller('SignupCtrl', ['$location', 'Auth', function ($location, Auth) {
 
     var vm = this;
 
@@ -10,23 +10,19 @@ angular.module('eggercise')
       name: 'SignupCtrl',
 
       /**
-       * User credentials
-       */
-      user: { email: 'test@test.com', password: 'test' },
-
-      /**
        * Signup
        */
       signup: function () {
         Auth.signup(vm.user)
           .then(function () {
-            $location.path('/');
+            $location.path('/group');
           })
           .catch(function (err) {
             vm.error = err;
+            $location.path('/signup');
           });
       }
 
     });
 
-  });
+  }]);

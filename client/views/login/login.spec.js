@@ -1,33 +1,33 @@
-'use strict';
+// 'use strict';
 
-describe('Controller: LoginCtrl', function () {
+// describe('Controller: LoginCtrl', function () {
 
-  beforeEach(module('eggercise'));
+//   beforeEach(module('eggercise'));
 
-  var LoginCtrl,
-    $httpBackend,
-    $location,
-    $cookieStore;
+//   var LoginCtrl,
+//     $httpBackend,
+//     $location,
+//     $cookieStore;
 
-  beforeEach(inject(function ($controller, _$httpBackend_, _$location_, _$cookieStore_) {
-    LoginCtrl = $controller('LoginCtrl', {});
-    $httpBackend = _$httpBackend_;
-    $cookieStore = _$cookieStore_;
-    $location = _$location_;
-  }));
+//   beforeEach(inject(function ($controller, _$httpBackend_, _$location_, _$cookieStore_) {
+//     LoginCtrl = $controller('LoginCtrl', {});
+//     $httpBackend = _$httpBackend_;
+//     $cookieStore = _$cookieStore_;
+//     $location = _$location_;
+//   }));
 
-  afterEach(function () {
-    $httpBackend.verifyNoOutstandingExpectation();
-    $httpBackend.verifyNoOutstandingRequest();
-    $cookieStore.remove('token');
-  });
+//   afterEach(function () {
+//     $httpBackend.verifyNoOutstandingExpectation();
+//     $httpBackend.verifyNoOutstandingRequest();
+//     $cookieStore.remove('token');
+//   });
 
-  it('should redirect to / after successful login', function () {
-    LoginCtrl.login({ email: 'test@test.com', password: 'test' });
-    $httpBackend.expectPOST('/auth/local')
-      .respond({ token: 'token' });
-    $httpBackend.flush();
-    expect($location.path()).toBe('/');
-  });
+//   it('should redirect to / after successful login', function () {
+//     LoginCtrl.login({ email: 'test@test.com', password: 'test' });
+//     $httpBackend.expectPOST('/auth/local')
+//       .respond({ token: 'token' });
+//     $httpBackend.flush();
+//     expect($location.path()).toBe('/');
+//   });
 
-});
+// });

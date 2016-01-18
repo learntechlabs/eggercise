@@ -1,21 +1,21 @@
-'use strict';
+// 'use strict';
 
-describe('Controller: HomeCtrl', function () {
+// describe('Controller: HomeCtrl', function () {
 
-  beforeEach(module('eggercise'));
+//   beforeEach(module('eggercise'));
 
-  var HomeCtrl,
-    scope;
+//   var HomeCtrl,
+//     scope;
 
-  beforeEach(inject(function ($controller, $rootScope) {
-    scope = $rootScope.$new();
-    HomeCtrl = $controller('HomeCtrl', {
-      $scope: scope
-    });
-  }));
+//   beforeEach(inject(function ($controller, $rootScope) {
+//     scope = $rootScope.$new();
+//     HomeCtrl = $controller('HomeCtrl', {
+//       $scope: scope
+//     });
+//   }));
 
-  it('should ...', function () {
-    expect(1).toBe(1);
-  });
+//   it('should ...', function () {
+//     expect(1).toBe(1);
+//   });
 
-});
+// });

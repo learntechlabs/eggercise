@@ -1,0 +1,123 @@
+<div class="container">
+<div ng-init="vm.showGroup(vm.group_id)">
+  <h1>{{ vm.group.name }}</h1>
+  <div class="col-xs-12">
+    {{vm.group.description}}
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-xs-4">
+              {{vm.startDate}} to {{vm.endDate}} - ${{vm.group.bet}} Bet
+            </div>
+
+            <!-- if check to see if user logged in is creator of the group -->
+            <div class="col-xs-4" ng-if="vm.group._creator === vm.authUserId ">
+            <!-- Update Group Button -->
+                <a id="update-button" href="/group/updateGroup?group_id={{vm.group._id}}">
+                <button class="btn btn-info">
+                <div class="glyphicon glyphicon-pencil small-glyph"></div>
+                </button>
+                </a>
+              <!-- Delete Group Button -->
+              <button ng-controller="DeleteGroupCtrl as delete" class="btn btn-danger" ng-click="delete.deleteGroup(vm.group._id)">
+                <div class="glyphicon glyphicon-remove small-glyph"></div>
+              </button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-4 groupdata">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <div class="days">
+              {{vm.daysElapsed}} / {{vm.totaldays}}
+            </div>
+          </div>
+          <div class="col-md-12 text-center">
+              Days Elapsed
+          </div>
+        </div>
+    </div>
+
+    <div class="col-xs-4 groupdata">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <div class="days" ng-if="vm.daysDifference>0">
+              {{vm.daysDifferenceAbsolute}}
+            </div>
+            <div class="col-md-12 text-center" ng-if="vm.daysDifference>1">
+              Days Ahead
+            </div>
+            <div class="col-md-12 text-center" ng-if="vm.daysDifference==1">
+              Day Ahead
+            </div>
+            <div class="days" ng-if="vm.daysDifference<0">
+              {{vm.daysDifferenceAbsolute}}
+            </div>
+            <div class="col-md-12 text-center" ng-if="vm.daysDifference<-1">
+              Days Behind
+            </div>
+            <div class="col-md-12 text-center" ng-if="vm.daysDifference==-1">
+              Day Behind
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="col-xs-4 groupdata">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <div class="days">
+              ${{vm.oweAbsolute}}
+            </div>
+          </div>
+          <div class="col-md-12 text-center" ng-if="vm.owe>0">
+            Owed
+          </div>
+          <div class="col-md-12 text-center" ng-if="vm.owe<0">
+            Owe
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <h3>Days Exercised</h3>
+  <hr>
+  <div class="row" ng-repeat="member in vm.membersArray | orderBy: 'member.exercises.length' : true">
+    <div class="col-xs-10" >
+      <div>
+        <p>
+          <a href="/viewLog/{{member._id}}">
+          {{member.name}}
+          </a>
+        </p>
+      </div>
+    </div>
+    <div class="col-xs-2">
+      <p>{{member.validExercises.length}}</p>
+    </div>
+  </div>
+
+  <h3>The Pot</h3>
+  <hr>
+  <div class="row">
+    <div>
+      <div ng-repeat="member in vm.group._members">
+        <div>
+          <div class="col-xs-10 memberlist">{{member.name}}</div>
+          <div class="col-xs-2" ng-if="member.daysAhead">
+            Wins ${{member.memberOwes}}
+          </div>
+          <div class="col-xs-2" ng-if="member.daysBehind">
+            Pays ${{member.memberOwes}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
