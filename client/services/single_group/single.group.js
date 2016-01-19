@@ -3,12 +3,7 @@
 angular.module('eggercise')
   .service('SingleGroupService', ['DateService', 'Auth', function (DateService, Auth) {
     var service = {};
-
-    service.getUserId = function(){
-      var authUserId = Auth.getUser()._id;
-      return authUserId;
-    }
-
+    
     service.elapsedDay = function (startDate, endDate) {
       var daysElapsed;
       var todayDate = DateService.dateToMilli(new Date());

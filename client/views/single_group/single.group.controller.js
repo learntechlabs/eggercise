@@ -14,7 +14,7 @@ angular.module('eggercise')
     vm.daysDifferenceAbsolute;
     vm.owe;
     vm.oweAbsolute;
-    vm.authUserId = SingleGroupService.getUserId();
+    vm.authUserId;
 
     angular.extend(vm, {
 
@@ -22,22 +22,32 @@ angular.module('eggercise')
 
       //show Group
       showGroup: function (id) {
-        GroupService.showGroup(id)
-          .then(function (data) {
-            vm.startDate = DateService.getFullDate(data.start);
-            vm.endDate = DateService.getFullDate(data.end);
-            vm.totaldays = DateService.daysBetween(data.start, data.end);
-            vm.daysElapsed = SingleGroupService.elapsedDay(data.start, data.end);
-            vm.group = data;
+        Auth.getUserNow()
+        .then(function (data){
+          console.log('data:', data);
+          vm.authUserId = data._id;
+          
+          //existing showGroup logic
+          GroupService.showGroup(id)
+            .then(function (data) {
+              vm.startDate = DateService.getFullDate(data.start);
+              vm.endDate = DateService.getFullDate(data.end);
+              vm.totaldays = DateService.daysBetween(data.start, data.end);
+              vm.daysElapsed = SingleGroupService.elapsedDay(data.start, data.end);
+              vm.group = data;
 
-            //Execute moneyOwed()
-            vm.moneyOwed(id);
+              //Execute moneyOwed()
+              vm.moneyOwed(id);
 
-          })
-          .catch(function (err) {
-            vm.error = err;
-            $log.error('Error: ', err);
-          });
+            })
+            .catch(function (err) {
+              vm.error = err;
+              $log.error('Error: ', err);
+            });
+        })
+        .catch(function (error){
+          return error;
+        })
       },
 
       moneyOwed: function (id) {

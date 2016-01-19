@@ -62,7 +62,6 @@ angular.module('eggercise')
      * Logout
      */
     this.logout = function () {
-      console.log('someone logged me out');
       $cookieStore.remove('token');
       _user = {};
     };
@@ -101,5 +100,28 @@ angular.module('eggercise')
     this.getUser = function () {
       return _user;
     };
+
+    this.getUserNow = function () {
+      var deferred = $q.defer();
+    
+      if($cookieStore.get('token')){
+        $http.get('/api/users/me')
+          .success(function (res) {
+            deferred.resolve(res);
+          })
+          .error(function (error) {
+            deferred.reject('Error: ',  error);
+            console.log('error');
+          });
+          return deferred.promise;
+      }else{
+        deferred.resolve();
+      }
+      return deferred.promise;
+    };
+
+
+
+
 
   });
