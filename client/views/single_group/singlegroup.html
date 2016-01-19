@@ -49,24 +49,24 @@
     <div class="col-xs-4 groupdata">
         <div class="row">
           <div class="col-md-12 text-center">
-            <div class="days" ng-if="vm.daysDifference>0">
+            <div class="days">
               {{vm.daysDifferenceAbsolute}}
             </div>
-            <div class="col-md-12 text-center" ng-if="vm.daysDifference>1">
-              Days Ahead
-            </div>
-            <div class="col-md-12 text-center" ng-if="vm.daysDifference==1" >
-              Day Ahead
-            </div> 
-            <div class="col-md-12 text-center" ng-if="vm.daysDifference==0">
-              0 Days Ahead/Behind
-            </div>
-            <div class="col-md-12 text-center" ng-if="vm.daysDifference<-1">
-              Days Behind
-            </div>
-            <div class="col-md-12 text-center" ng-if="vm.daysDifference==-1">
-              Day Behind
-            </div>
+          </div>
+          <div class="col-md-12 text-center" ng-if="vm.daysDifference>1">
+            Days Ahead
+          </div>
+          <div class="col-md-12 text-center" ng-if="vm.daysDifference==1" >
+            Day Ahead
+          </div>
+          <div class="col-md-12 text-center" ng-if="vm.daysDifference==0">
+            Days Ahead/Behind
+          </div>
+          <div class="col-md-12 text-center" ng-if="vm.daysDifference<-1">
+            Days Behind
+          </div>
+          <div class="col-md-12 text-center" ng-if="vm.daysDifference==-1">
+            Day Behind
           </div>
         </div>
     </div>

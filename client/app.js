@@ -5,6 +5,7 @@ angular.module('eggercise', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
+  'ngMessages',
   'ui.bootstrap',
   'ngAnimate',
   'angular-toasty'
