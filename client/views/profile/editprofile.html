@@ -1,0 +1,41 @@
+<div class="container" ng-init="vm.getUser()">
+  <div>
+    <h1 class="margin-base-vertical">Update Profile</h1>
+  </div>
+
+  <div class="row pageforms modifyWidth">
+      <form name="profileForm" ng-submit="vm.editProfile()">
+        <div class="row">
+            <div>
+              Name
+              <input type="name" ng-model="vm.formData.name" placeholder="{{vm.loggedUser.name}}" class="form-control">
+            </div>
+            <div ng-class="{ 'has-error': profileForm.userEmail.$touched && profileForm.userEmail.$invalid }">
+              Email
+              <input type="email" name="userEmail" ng-model="vm.formData.email" placeholder="{{vm.loggedUser.email}}" class="form-control">
+              <div ng-messages="profileForm.userEmail.$error" ng-if="profileForm.userEmail.$dirty" ng-show="profileForm.userEmail.$touched">
+                <div ng-message="email">Your email address is invalid</div>
+              </div>
+            </div>
+            <div>
+              Current Password
+              <input type="password" placeholder="Required only when updating password" class="form-control">
+            </div>
+            <div>
+              New Password
+              <input type="password" name="newpass1" ng-model="vm.formData.newpass" class="form-control">
+            </div>
+            <div>
+              Confirm Password
+              <input type="password" name="newPass2" class="form-control" ng-pattern="{{vm.formData.newpass}}" ng-model="newPass2">
+              <div ng-messages="profileForm.newPass2.$error">
+                <div ng-message="pattern">Passwords do not match</div>
+              </div>
+            </div>
+            <input type="submit" class="btn btn-lg btn-primary btn-block signupbtn" value="Update Profile">
+        </div>
+      </form>
+  </div>
+
+  <pre ng-if="vm.error">{{ vm.error | json }}</pre>
+</div>

@@ -1,19 +1,27 @@
-<nav>
-  <ul>
-    <li>
-      <a href="/">home</a>
+<nav class="navbar navbar-inverse">
+  <ul class="nav nav-tabs">
+    <li role="presentation">
+      <a href="/">Eggercise</a>
     </li>
-    <li ng-if="!Auth.isLogged()">
-      <a href="/signup">signup</a>
+    <li role="presentation" ng-if="!Auth.isLogged()">
+      <a href="/signup">Signup</a>
     </li>
-    <li ng-if="!Auth.isLogged()">
-      <a href="/login">login</a>
+    <li role="presentation" ng-if="!Auth.isLogged()">
+      <a href="/login">Login</a>
     </li>
-    <li ng-if="Auth.isLogged()">
-      <a href="" ng-click="Auth.logout()">logout</a>
+    <li role="presentation" ng-if="Auth.isLogged()">
+      <a href="/group">My Groups</a>
     </li>
-    <li>
-      <pre>logged in: {{ Auth.isLogged() }}</pre>
+    <li class="btn-group" dropdown ng-if="Auth.isLogged()">
+      <a type="button" class="dropdown-toggle" dropdown-toggle>{{Auth.getUser().name}} <span class="caret"></span></a>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="/log" ng-click="">Log Workout</a>
+        </li>
+        <li><a href="/editprofile" ng-click="">Profile</a>
+        </li>
+        <li><a href="/" ng-click="Auth.logout()">Logout</a>
+        </li>
+      </ul>
     </li>
   </ul>
 </nav>

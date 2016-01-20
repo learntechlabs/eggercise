@@ -1,3 +1,235 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   font-family: sans-serif;
+  margin-bottom: 60px;
+}
+
+.landingpage {
+  color: white;
+  text-align: center;
+  height: 400px;
+  background: url('../../assets/images/eggerciseimage.jpg') no-repeat center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+}
+
+.signupbtn {
+  background-color: #162955;
+}
+
+.pageforms {
+  margin: auto;
+  width: 33%;
+}
+
+.pageforms > p > a {
+  color: white;
+  text-decoration: underline;
+  font-style: italic;
+}
+
+.groupdata {
+  margin: 10px;
+  height: 120px;
+  width: 300px;
+  padding: 20px;
+  background-color: white;
+
+  /* outer shadows  (note the rgba is red, green, blue, alpha) */
+  -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 1px 6px rgba(23, 69, 88, .5);
+
+  /* rounded corners */
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+
+  /* gradients */
+  background: -webkit-gradient(linear, left top, left bottom,
+  color-stop(0%, white), color-stop(15%, white), color-stop(100%, #2E4272));
+  background: -moz-linear-gradient(top, white 0%, white 55%, #2E4272 130%);
+}
+
+.logadd {
+  margin: 10px;
+  height: 80px;
+  // width: 300px;
+  // padding: 20px;
+  background-color: white;
+
+  /* outer shadows  (note the rgba is red, green, blue, alpha) */
+  -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 1px 6px rgba(23, 69, 88, .5);
+
+  /* rounded corners */
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+
+  /* gradients */
+  background: -webkit-gradient(linear, left top, left bottom,
+  color-stop(0%, white), color-stop(15%, white), color-stop(100%, #2E4272));
+  background: -moz-linear-gradient(top, white 0%, white 55%, #2E4272 130%);
+}
+
+.loglist {
+  margin: auto;
+  padding: 10px 0 10px 60px;
+  background-color: white;
+
+  /* outer shadows  (note the rgba is red, green, blue, alpha) */
+  -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 1px 6px rgba(23, 69, 88, .5);
+
+  /* rounded corners */
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+
+  /* gradients */
+  background: -webkit-gradient(linear, left top, left bottom,
+  color-stop(0%, white), color-stop(15%, white), color-stop(100%, #2E4272));
+  background: -moz-linear-gradient(top, white 0%, white 55%, #2E4272 130%);
+}
+
+.logworkout {
+  padding: 10px 0 10px 0;
+  background-color: white;
+
+  /* outer shadows  (note the rgba is red, green, blue, alpha) */
+  -webkit-box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0px 1px 6px rgba(23, 69, 88, .5);
+
+  /* rounded corners */
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+
+  /* gradients */
+  background: -webkit-gradient(linear, left top, left bottom,
+  color-stop(0%, white), color-stop(15%, white), color-stop(100%, #2E4272));
+  background: -moz-linear-gradient(top, white 0%, white 55%, #2E4272 130%);
+}
+
+.groupimage {
+  margin-top: 0.5em;
+}
+
+.footer {
+  padding-top: 2px;
+  bottom: 0;
+  margin-top: 2px;
+  width: 100%;
+  height: 60px;
+  background: #162955;
+  text-align: center;
+  color: #337ab7;
+  position: absolute;
+}
+
+.form-icon{
+  margin-bottom: 4px;
+}
+
+.margin-base-vertical {
+  margin: 40px 0;
+  text-align: center;
+}
+
+
+.fix-margin{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+.navbar {
+  background-color: #162955;
+  color: white;
+}
+
+.navbar > li > a {
+  color: #000;
+}
+
+.nav-tabs {
+  border-bottom: none;
+}
+
+.headline {
+  padding-bottom: 10px;
+}
+
+.form-control {
+  margin-bottom: 4px !important;
+}
+
+
+.large-glyph {
+  color: black;
+  font-size: 200%;
+}
+
+.glyph-title {
+  color: black;
+}
+
+.control-button {
+  clear: both;
+  display: flex;
+  align-items: center;
+}
+
+#update-button {
+  text-decoration: none;
+}
+
+
+#cancel-button {
+  margin-left: 2px;
+}
+
+.days {
+  font-weight: bold;
+  font-size: 300%;
+}
+
+.memberlist {
+  margin-bottom: 20px;
+}
+
+#delete-member{
+  margin-left: auto;
+  margin-left: auto;
+}
+
+#hideButton{
+  /*display: none;*/
+}
+.workoutlog {
+  text-align: center;
+}
+
+#ifAdmin{
+  font-weight: bold;
+}
+
+/* Media-Query Landscape phones and down */
+@media (max-width: 480px) {
+  #changeFontSize{
+    font-size: 1.5em;
+  }
+
+  .modifyWidth {
+    width: 80%;
+    margin-right: auto;
+    margin-left: auto;
+
+  }
 }

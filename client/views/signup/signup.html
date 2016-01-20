@@ -1,17 +1,14 @@
-<div>
-  {{ vm.name }}
+<div class="container">
+  <form class="form-signin" ng-submit="vm.signup()">
+    <h2 class="form-signin-heading">Please Sign Up</h2>
+    <label for="inputName" class="sr-only">Name</label>
+    <input type="name" id="inputName" ng-model="vm.user.name" class="form-control" placeholder="Name" required autofocus>
+    <label for="inputEmail" class="sr-only">Email Address</label>
+    <input type="email" id="inputEmail" ng-model="vm.user.email" class="form-control" placeholder="Email Address" required>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" ng-model="vm.user.password" class="form-control" placeholder="Password" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+  </form>
 </div>
-
-<form ng-submit="vm.signup()">
-  <input type="email"
-         ng-model="vm.user.email"
-         placeholder="email">
-  <input type="password"
-         ng-model="vm.user.password"
-         placeholder="password">
-  <button type="submit">
-    signup
-  </button>
-</form>
 
 <pre ng-if="vm.error">{{ vm.error | json }}</pre>

@@ -5,10 +5,12 @@ angular.module('eggercise', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngAnimate'
+  'ngMessages',
+  'ui.bootstrap',
+  'ngAnimate',
+  'angular-toasty'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
-
     $routeProvider
       .otherwise({
         redirectTo: '/'
@@ -36,11 +38,10 @@ angular.module('eggercise', [
           $cookieStore.remove('token');
           return $q.reject(response);
         }
-        else {
+         else {
           return $q.reject(response);
         }
       }
-
     };
   })
 
@@ -48,12 +49,33 @@ angular.module('eggercise', [
 
     $rootScope.Auth = Auth;
 
-    $rootScope.$on('$routeChangeStart', function (event, next) {
-      Auth.isReadyLogged().catch(function () {
-        if (next.authenticate) {
-          $location.path('/');
-        }
-      });
+    $rootScope.$on('$locationChangeStart', function (event, next, current) {
+      var requestedPath = $location.url();
+      var publicPages = ['/', '/login', '/signup'];
+      var restrictedPage = publicPages.indexOf(requestedPath) === -1;
+
+      if (restrictedPage) {
+        Auth.isReadyLogged()
+        .then(function() {
+          $rootScope.unauthorized = false;
+        })
+        .catch(function () {
+          $rootScope.unauthorized = true;
+          event.preventDefault();
+          $rootScope.returnToPath = $location.url();
+          $location.path('/login');
+        });
+      }
+    });
+  })
+
+  .run(function ($rootScope, $location) {
+
+    $rootScope.$on('$locationChangeStart', function() {
+      $rootScope.previousPage = location.pathname;
     });
 
+    $rootScope.back = function () {
+      $location.path($rootScope.previousPage);
+    };
   });

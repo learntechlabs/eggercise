@@ -1,0 +1,70 @@
+<div class=" container pageforms modifyWidth">
+  <div class="row">
+    <a href="/log">
+      <div class="logadd" id="logexercise">
+          <div class="row">
+            <div class="text-center">
+              <div class="glyphicon glyphicon-pencil large-glyph groupimage">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="text-center">
+              <div class="glyph-title">
+                Log Exercise
+              </div>
+            </div>
+          </div>
+      </div>
+    </a>
+  </div>
+  <div class="row">
+    <a href="/group/create">
+      <div class="logadd" id="creategroup">
+          <div class="row">
+            <div class="text-center">
+              <div class="glyphicon glyphicon-plus large-glyph text-center groupimage">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="text-center">
+              <div class="glyph-title">
+                Add Group
+              </div>
+            </div>
+          </div>
+      </div>
+    </a>
+  </div>
+
+  <h2>My Active Groups</h2>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <!-- Current user name display and edit (form field) -->
+          <div ui-sortable ng-init="vm.showAllGroups()">
+          <div ng-repeat="group in vm.groups">
+            <div>
+              <p> <a href="/group/show/{{group._id}}">{{ group.name }}</a> - ${{ group.bet }}
+              </p>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>My Past Groups</h2>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          Group info here
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

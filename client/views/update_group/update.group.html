@@ -1,0 +1,92 @@
+<!-- Modal for updating a new group-->
+<div ng-init="vm.getGroup(vm.group_id)"></div>
+<div class="container">
+  <h2> Update your group: {{vm.group.name}} </h2>
+  <div class="row">
+    <div class="col-xs-12 modifyWidth">
+      <form role="form" ng-submit="vm.updateGroup(vm.group_id, vm.formData)">
+
+        <div class="row">
+          <div class="input-group col-md-4">
+            <div>
+              Group Name
+              <input ng-model="vm.formData.name" type="text" placeholder="{{vm.group.name}}" class="form-control">
+            </div>
+            <div>
+              Group Description
+              <input ng-model="vm.formData.description" type="text" placeholder="{{vm.group.description}}" class="form-control">
+            </div>
+            <div>
+              Buy-In
+              <input ng-model="vm.formData.bet" type="number" placeholder="${{vm.group.bet}}" class="form-control">
+            </div>
+            <div>
+              Start Date
+              <p class="input-group">
+              <input ng-model="vm.formData.start" type="text"
+              datepicker-popup="mediumDate"
+              is-open="vm.startDatePickerIsOpen"
+              ng-click="vm.valuationDatePickerOpen()"
+              class="form-control"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default form-icon" ng-click="vm.valuationDatePickerOpen($event, 'start')">
+                  <i id="start-date-glyph" class="glyphicon glyphicon-calendar"></i>
+                </button>
+              </span>
+              </p>
+            </div>
+            <div>
+              End Date
+              <p class="input-group">
+              <input ng-model="vm.formData.end" type="text"
+              datepicker-popup="mediumDate"
+              is-open="vm.endDatePickerIsOpen"
+              ng-click="vm.valuationDatePickerOpen()"
+              class="form-control"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default form-icon" ng-click="vm.valuationDatePickerOpen($event, 'end')">
+                  <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+              </span>
+              </p>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Update">
+            <a ng-click="back()" class="btn btn-default" id="cancel-button"> Cancel </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+
+    <div class="col-md-12">
+      <h2>Group Members</h2>
+      <hr>
+      <span id="ifAdmin"></span>
+      <div>
+        <div>
+          <!-- <div ng-repeat="members in vm.group._members"> -->
+          <div ng-repeat="members in vm.group._members">
+            <div class="col-md-10 fix-margin">
+              <div>
+                <div>
+                  <!-- Delete Member Button -->
+                  <div id="delete-member" ng-disabled="hideButton">
+                    <!-- <div ng-if="member._name"> -->
+                      {{members.name}}
+                    <!-- </div> -->
+                    <button ng-controller="DeleteMemberCtrl as delete" class="btn btn-danger" ng-click="delete.deleteMember(vm.memberId)">
+                      <div class="glyphicon glyphicon-remove small-glyph"></div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

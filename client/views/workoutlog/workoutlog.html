@@ -1,0 +1,25 @@
+<div ng-init="vm.showWorkout()"></div>
+<div class="container workoutlog row">
+  <h1> {{vm.user.name}} </h1>
+  <h3> Log Your Workout </h3>
+  <div class="row pageforms">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title"> Your Exercise Records: </h4>
+        </div>
+        <div class="panel-body logworkout">
+          <div ng-repeat="dateObject in vm.allDates track by $index">
+            <label style="width: 12em; font-size: 120%">
+              <div class="row">
+                <div class="col-xs-10">{{dateObject.date}}</div>
+                <div class="col-xs-2">
+                  <input ng-if="dateObject.checked" ng-model="vm.allDates[$index].checked" ng-change="vm.logToggle($index, dateObject.date)" type="checkbox" checked>
+                  <input ng-if="!dateObject.checked" ng-model="vm.allDates[$index].checked" ng-change="vm.logToggle($index, dateObject.date)" type="checkbox">
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>

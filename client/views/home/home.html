@@ -1,3 +1,37 @@
-<div>
-  {{ vm.name }}
+<div class="container">
+    <div class="landingpage">
+      <div class="headline">
+          <h1 class="margin-base-vertical">Eggercise</h1>
+
+          <p class="landingtext">Welcome to the worst -- or perhaps best -- experience of your life.</p>
+
+          <p class="landingtext">Eggercise lets you compete against friends to see who can exercise the most! Money's on the line, so get yo' ass to the gym!</p>
+      </div>
+      <div class="pageforms modifyWidth">
+      <form class="form-signin" ng-controller="SignupCtrl as signup" ng-submit="signup.signup()">
+        <label for="inputName" class="sr-only">Name</label>
+        <input type="name" id="inputName" ng-model="signup.user.name" class="form-control" placeholder="Name" required autofocus>
+        <label for="inputEmail" class="sr-only">Email Address</label>
+        <input type="email" id="inputEmail" ng-model="signup.user.email" class="form-control" placeholder="Email Address" required>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" ng-model="signup.user.password" class="form-control" placeholder="Password" required>
+        <button class="btn btn-lg btn-primary btn-block signupbtn" type="submit">Register</button>
+      </form>
+      <p>Already have an account?  <a href="/login">  Login here</a></p>
+      </div>
+    </div>
+
+<!--   <div class="row">
+    <div ng-controller="CarouselDemoCtrl" id="slides_control">
+      <div id="slider" class="col-md-12">
+        <carousel interval="myInterval">
+          <slide ng-repeat="slide in slides" active="slide.active">
+            <img ng-src="{{slide.image}}">
+          </slide>
+        </carousel>
+      </div>
+    </div>
+  </div> -->
 </div>
+
+<pre ng-if="vm.error">{{ vm.error | json }}</pre>

@@ -1,0 +1,53 @@
+<div class="container">
+  <div>
+    <h1 class="margin-base-vertical">New Group</h1>
+  </div>
+  <div class="row pageforms modifyWidth">
+      <form role="form" ng-submit="vm.createGroup()">
+        <div class="row">
+          <div class="input-group">
+            <div>
+              Group Name
+              <input ng-model="vm.formData.name" type="text" placeholder="New Group's Name" class="form-control">
+            </div>
+            <div>
+              Group Description
+              <input ng-model="vm.formData.description" type="text" placeholder="New Group's Description" class="form-control">
+            </div>
+            <div>
+              Buy-In
+              <input ng-model="vm.formData.bet" type="number" placeholder="Buy-In Price" class="form-control">
+            </div>
+            <div>
+              Start Date
+              <p class="input-group">
+              <input ng-model="vm.formData.start" type="text"
+              uib-datepicker-popup="mediumDate"
+              is-open="vm.startDatePickerIsOpen"
+              ng-click="vm.valuationDatePickerOpen()"
+              class="form-control"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default form-icon" ng-click="vm.valuationDatePickerOpen($event, 'start')">
+                  <i id="start-date-glyph" class="glyphicon glyphicon-calendar"></i>
+                </button>
+              </span>
+              </p>
+            </div>
+            <div>
+              End Date
+              <p class="input-group">
+              <input ng-model="vm.formData.end" type="text" uib-datepicker-popup="mediumDate" is-open="vm.endDatePickerIsOpen" ng-click="vm.valuationDatePickerOpen()" placehodler="End Date" class="form-control">
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default form-icon" ng-click="vm.valuationDatePickerOpen($event, 'end')">
+                  <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+              </span>
+              </p>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Create Group">
+            <a href="/group" class="btn btn-default" id="cancel-button">Cancel</a>
+          </div>
+        </div>
+      </form>
+  </div>
+</div>
