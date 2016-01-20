@@ -8,15 +8,15 @@
           <div class="input-group">
             <div>
               Group Name
-              <input ng-model="vm.formData.name" type="text" placeholder="New Group's Name" class="form-control">
+              <input ng-model="vm.formData.name" type="text" placeholder="New Group's Name" class="form-control" required>
             </div>
             <div>
               Group Description
-              <input ng-model="vm.formData.description" type="text" placeholder="New Group's Description" class="form-control">
+              <input ng-model="vm.formData.description" type="text" placeholder="New Group's Description" class="form-control" required>
             </div>
             <div>
               Buy-In
-              <input ng-model="vm.formData.bet" type="number" placeholder="Buy-In Price" class="form-control">
+              <input ng-model="vm.formData.bet" type="number" placeholder="Buy-In Price" class="form-control" required>
             </div>
             <div>
               Start Date
@@ -25,7 +25,7 @@
               uib-datepicker-popup="mediumDate"
               is-open="vm.startDatePickerIsOpen"
               ng-click="vm.valuationDatePickerOpen()"
-              class="form-control"/>
+              class="form-control"/ required>
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default form-icon" ng-click="vm.valuationDatePickerOpen($event, 'start')">
                   <i id="start-date-glyph" class="glyphicon glyphicon-calendar"></i>
@@ -36,7 +36,7 @@
             <div>
               End Date
               <p class="input-group">
-              <input ng-model="vm.formData.end" type="text" uib-datepicker-popup="mediumDate" is-open="vm.endDatePickerIsOpen" ng-click="vm.valuationDatePickerOpen()" placehodler="End Date" class="form-control">
+              <input ng-model="vm.formData.end" type="text" uib-datepicker-popup="mediumDate" is-open="vm.endDatePickerIsOpen" ng-click="vm.valuationDatePickerOpen()" placehodler="End Date" class="form-control" required>
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default form-icon" ng-click="vm.valuationDatePickerOpen($event, 'end')">
                   <i class="glyphicon glyphicon-calendar"></i>

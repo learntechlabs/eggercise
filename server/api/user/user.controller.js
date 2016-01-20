@@ -55,11 +55,21 @@ exports.getMe = function (req, res) {
 exports.updateProfile = function (req, res) {
   var query = req.user._id;
   var options = {new: true};
+  var password = req.body.password;
 
   var formInputs = {
     name: req.body.name,
     email: req.body.email,
-    password: req.body.password
+  };
+
+  if (password) {
+    User.findById(query)
+    .exec(function (err, user) {
+      if (err) { return handleError(res, err); }
+      if (!user) { return res.json(401); }
+      user.password = password;
+      user.save();
+    });
   };
 
   var update = {};

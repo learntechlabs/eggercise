@@ -18,16 +18,12 @@
               </div>
             </div>
             <div>
-              Current Password
-              <input type="password" placeholder="Required only when updating password" class="form-control">
-            </div>
-            <div>
               New Password
-              <input type="password" name="newpass1" ng-model="vm.formData.newpass" class="form-control">
+              <input type="password" name="newpass1" ng-model="vm.formData.password" class="form-control">
             </div>
             <div>
               Confirm Password
-              <input type="password" name="newPass2" class="form-control" ng-pattern="{{vm.formData.newpass}}" ng-model="newPass2">
+              <input type="password" name="newPass2" class="form-control" ng-pattern="{{vm.formData.password}}" ng-model="newPass2">
               <div ng-messages="profileForm.newPass2.$error">
                 <div ng-message="pattern">Passwords do not match</div>
               </div>

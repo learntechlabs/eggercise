@@ -12,26 +12,12 @@ var UserSchema = new Schema({
   exercises: [Date],
   _groups: [{type: mongoose.Schema.Types.ObjectId, ref:'Group', required: false }],
   joinDate: Date
-// }
-// , {
-//   toObject: {
-//     virtuals: true
-//   },
-//   toJSON: {
-//     virtuals: true
-//   }
 });
 
 
 /**
  * Virtuals
  */
-
-// UserSchema
-//   .virtual('joinDate')
-//   .get(function () {
-//     return this._id.getTimestamp();
-//   });
 
 UserSchema
   .virtual('password')
@@ -42,6 +28,7 @@ UserSchema
   })
   .get(function () {
     return this._password;
+    console.log('made it to user model', this._password);
   });
 
 /**
