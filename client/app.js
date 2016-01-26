@@ -53,25 +53,27 @@ angular.module('eggercise', [
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
       var requestedPath = $location.url();
-      var publicPages = ['/', '/login', '/invites/accept/:invite_id'];
+      var publicPages = [/\//, /\/login/, /\/invites\/accept\/S+$/];
       var restrictedPage = publicPages.indexOf(requestedPath) === -1;
 
-        Auth.isReadyLogged()
-        .then(function() {
-          $rootScope.unauthorized = false;
-          if(requestedPath === publicPages[0]) {
-            event.preventDefault();
-            $location.path('/group');
+      Auth.isReadyLogged()
+      .then(function() {
+        $rootScope.unauthorized = false;
+        if(requestedPath === publicPages[0].test(publicPages[0])) {
+          event.preventDefault();
+          $location.path('/group');
+        }
+      })
+      .catch(function () {
+        $rootScope.unauthorized = true;
+        //publicPage is different from publicPages.
+        //publicPage is the element of the publicPages.
+        publicPages.forEach(function(publicPage, index, publicPages) {
+          if (requestedPath === publicPage.test(publicPage)) {
+            $location.path(publicPage)
           }
         })
-        .catch(function () {
-          $rootScope.unauthorized = true;
-          if (restrictedPage) {
-            event.preventDefault();
-            $rootScope.returnToPath = $location.url();
-            $location.path('/login');
-          }
-        });
+      })
     });
   })
 

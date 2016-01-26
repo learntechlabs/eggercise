@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('eggercise')
-  .service('Auth', function ($rootScope, $cookieStore, $q, $http) {
+  .service('Auth', function ($rootScope, $cookieStore, $q, $http, $location) {
 
     var _user = {};
     var _ready = $q.defer();
@@ -30,6 +30,21 @@ angular.module('eggercise')
         .then(function (res) {
           _user = res.data.user;
           $cookieStore.put('token', res.data.token);
+          deferred.resolve();
+        })
+        .catch(function (err) {
+          deferred.reject(err.data);
+        });
+      return deferred.promise;
+    };
+
+    this.signupForInvite = function (inviteId, groupId, user) {
+      var deferred = $q.defer();
+      $http.post('/api/invites/accept/' + inviteId, user)
+        .then(function (res) {
+          _user = res.data.user;
+          $cookieStore.put('token', res.data.token);
+          $location.path('/group');
           deferred.resolve();
         })
         .catch(function (err) {
@@ -103,7 +118,7 @@ angular.module('eggercise')
 
     this.getUserNow = function () {
       var deferred = $q.defer();
-    
+
       if($cookieStore.get('token')){
         $http.get('/api/users/me')
           .success(function (res) {
@@ -111,16 +126,10 @@ angular.module('eggercise')
           })
           .error(function (error) {
             deferred.reject('Error: ',  error);
-            console.log('error');
           });
       }else{
         deferred.resolve(_user);
       }
       return deferred.promise;
     };
-
-
-
-
-
   });

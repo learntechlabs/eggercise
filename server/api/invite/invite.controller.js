@@ -1,7 +1,8 @@
 'use strict';
 
-var _ = require('lodash');
-
+var _ = require('lodash'),
+authService = require('../../auth/auth.service'),
+  mongoose = require('mongoose');
 var Group = require('../group/group.model'),
   User = require('../user/user.model'),
   Invite = require('./invite.model'),
@@ -88,42 +89,61 @@ exports.create = function (req, res) {
   });
 }
 
+//View a single invitation
+exports.showInvite = function (req, res) {
+  var inviteId = req.params.invite_id;
 
+  Invite.findOne({ _id: inviteId})
+    .populate('_group')
+    .exec(function (error, foundInvite) {
+      if (!foundInvite && error === null) {
+        errorHandler.handle(res, 'Invite not found', 404);
+      } else if (foundInvite) {
+        res.json(foundInvite);
+      }
+    });
+}
 
 //Invitee accepts invitation
 exports.acceptInvite = function(req, res) {
-  var inviteId = req.params.invite_id;
+  var newUser = req.body;
+  var groupId = newUser.group._id;
 
-  Invite.findById({ _id: inviteId})
-    .exec(function (error, invite) {
-      if (error) {
-        errorHandler.handle(res, 'Invite not found', 404);
-      } else if (invite != null) {
-        User.findOne({ email: invite.email}, function (error, user) {
-          if (error) {
-            errorHandler.handle(res, 'User not found', 404);
-          } else {
-            user._groups.push(invite._group);
-            user.save(function (error, savedUser) {
-              if (error) {
-                errorHandler.handle(res, error, 500);
-              } else {
-                Group.findById( {_id: invite._group}, function (error, group) {
-                  group._members.push(user._id);
-                  group.save(function (error, savedGroup) {
-                    if (error) {
-                      errorHandler.handle(res, error, 500);
-                    } else {
-                      res.status(200).json(group);
-                    }
-                  });
-                })
-              }
-            });
-          }
-        });
-      } else {
-        res.status(404).json({message: 'invite not found'});
-      }
+  User.create(newUser, function (error, user) {
+    if (error) {
+      errorHandler.handle(res, error, 500);
+    } else {
+      User.findOne({_id: user._id})
+      .populate('_groups')
+      .exec(function (error, foundInvitee) {
+        if (error) {
+          errorHandler.handle(res, error, 404);
+        }
+          user._groups.push(newUser.group);
+          user.save();
+          var updatedGroup = populateMember(req, res, user._id);
+          res.status(201).json({
+          user: _.omit(user.toObject(), ['passwordHash', 'salt']),
+          token: authService.signToken(user._id),
+          invitee: foundInvitee
+      })
     });
+    }
+  });
+}
+
+function populateMember (req, res, id) {
+  var newUser = req.body;
+  var groupId = newUser.group._id;
+
+  Group.findOne({_id: groupId})
+  .populate('_members')
+  .exec(function (error, foundGroup) {
+    if (error) {
+      errorHandler.handle(res, error, 404);
+    }
+    foundGroup._members.push(id);
+    foundGroup.save();
+    return foundGroup;
+  })
 }

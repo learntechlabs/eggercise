@@ -19,7 +19,7 @@ a, u {
 .landingpage {
   color: white;
   text-align: center;
-  height: 700px;
+  height: 750px;
   background: url('../../assets/images/eggerciseimage.jpg') no-repeat center top;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -277,4 +277,18 @@ a, u {
   width: 100%;
   padding-right: 0px;
   padding-left: 0px;
+}
+
+.invite-links {
+  font-size: 20px;
+  color: #162955;
+  font-weight: bold;
+}
+
+.links {
+  margin-top: 15px;
+}
+
+.group-info {
+  font-weight: bold;
 }

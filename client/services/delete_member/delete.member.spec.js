@@ -11,7 +11,6 @@
       service = _DeleteMemberService_;
       memberData = [];
 
-
       handler = {
         success: function(member) {
           memberData.push(member);
@@ -24,8 +23,6 @@
       spyOn(handler, 'success').and.callThrough();
       spyOn(handler, 'error').and.callThrough();
     }));
-
-    
 
     it('should delete a member', function() {
       var id = '569d71819fa8beb94e1a67f0';
