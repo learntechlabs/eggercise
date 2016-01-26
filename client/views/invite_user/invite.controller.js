@@ -15,7 +15,7 @@ angular.module('eggercise')
       if (message === 'error') {
         toasty[message]({
           title: 'Failure',
-          msg: data.name + ' at ' + data.email + ' has already been invited to this group. Please select a different email address',
+          msg: vm.formData.name + ' at ' + vm.formData.email + ' has already been invited to this group. Please select a different email address',
           theme: 'material'
         })
       } else {
@@ -24,7 +24,7 @@ angular.module('eggercise')
           .then(function (group) {
             toasty[message]({
               title: 'Invited!',
-              msg: 'You have sucessfully invited ' + vm.formData.email + " to " + group.name,
+              msg: 'You have sucessfully invited ' + data.email + " to " + group.name,
               theme: "material"
             });
           })
@@ -41,10 +41,8 @@ angular.module('eggercise')
         vm.flashMessage('success', foundInvite);
       })
       .catch(function (error){
-        ErrorService.errorToasty(error);
+        vm.flashMessage('error', vm.formData);
+        vm.formData = {};
       });
-      vm.formData = {};
     }
-
-
   }]);

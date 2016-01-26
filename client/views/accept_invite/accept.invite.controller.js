@@ -1,19 +1,37 @@
 'use strict';
 
 angular.module('eggercise')
-  .controller('AcceptInviteCtrl', ['$scope', '$location', '$log', '$routeParams', 'InviteService', 'ErrorService', function ($scope, $location, $log, $routeParams, ErrorService) {
-    if ($scope.unauthorized) {
-      return;
-    }
+  .controller('AcceptInviteCtrl', ['$scope', '$location', '$log', '$routeParams', 'Auth', 'ErrorService', 'InviteService', 'GroupService', function ($scope, $location, $log, $routeParams, Auth, ErrorService, InviteService, GroupService) {
 
     var vm = this;
-    vm.inviteId = $routeParams.id;
-    InviteService.acceptInvite(vm.inviteId)
-    .then(function (group) {
-      vm.group = group;
-      $location.path('/group/show/' + vm.group._id);
-    })
-    .catch(function (error) {
-      ErrorService.errorToasty(error);
-    });
-  }]);
+    vm.invite = {};
+    vm.invite_id = $routeParams.invite_id;
+    vm.newUser = {};
+    vm.group_id;
+
+    //get invite
+    vm.getInvite = function (id) {
+      InviteService.showInvite(id)
+        .then(function (data) {
+          vm.invite = data;
+          vm.group_id = vm.invite._group._id;
+          vm.newUser.group = vm.invite._group;
+          vm.newUser.email = vm.invite.email;
+        })
+        .catch(function (error) {
+          ErrorService.errorToasty(error);
+        });
+    }
+
+    vm.acceptInvite = function (newUser) {
+      newUser.name = vm.newUser.name;
+      newUser.password = vm.newUser.password;
+      Auth.signupForInvite(vm.invite_id, vm.group_id, newUser)
+      .then(function (data) {
+        GroupService.showGroup(vm.group_id);
+      })
+      .catch(function (error) {
+        ErrorService.errorToasty(error);
+      })
+    }
+}]);

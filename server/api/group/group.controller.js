@@ -5,7 +5,7 @@ var _ = require('lodash'),
 
 var Group = require('./group.model'),
   User = require('../user/user.model');
-  
+
 var errorHandler = require('../../error/error-handling');
 
 //Show all groups
@@ -72,7 +72,7 @@ exports.showGroup = function (req, res) {
       .exec(function (error, group) {
       groupCreatorId = group._creator.toString();
 
-      if (error) { 
+      if (error) {
         errorHandler.handle(res, error, 404);
       } else if (group) {
         // store the member group ids in an array
@@ -130,7 +130,7 @@ exports.update = function (req, res){
   }
 
   Group.findByIdAndUpdate(groupId, update, options, function (error, updatedGroup) {
-    if (error) { 
+    if (error) {
       errorHandler.handle(res, error, 422);
       return;
     }
@@ -154,6 +154,3 @@ exports.showGroupLeaderboard = function (req, res){
     }
   })
 };
-
-
-
